@@ -1,0 +1,30 @@
+{
+  "name": "ezra-parsel-ui",
+  "version": "1.0.0",
+  "description": "",
+  "source": [
+    "./src/html/login.html",
+    "./src/html/verify-account.html",
+    "./src/html/home.html",
+    "./src/html/client-registration.html",
+    "./src/html/client-details.html"
+  ],
+  "browserslist": "defaults",
+  "scripts": {
+    "start": "parcel",
+    "build": "parcel build",
+    "watch": "parcel watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "os-browserify": "^0.3.0",
+    "parcel": "^2.8.3",
+    "path-browserify": "^1.0.1",
+    "process": "^0.11.10"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.3"
+  }
+}

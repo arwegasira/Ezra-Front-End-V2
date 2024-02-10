@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="../images/favicon-32x32.png" />
+    <link rel="stylesheet" href="../css/mainStyle.css" />
+    <script
+      src="https://kit.fontawesome.com/9cfdfc4e12.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>The Weekender - Registration</title>
+  </head>
+  <body>
+    <main class="reg-main">
+      <button class="open-nav-btn">
+        <i class="fa-solid fa-bars nav-toggle open"></i>
+      </button>
+      <div class="navigation">
+        <button class="close-nav-btn">
+          <i class="fa-solid fa-xmark nav-toggle close"></i>
+        </button>
+        <nav class="nav">
+          <ul>
+            <li>
+              <a href="#" class="active"
+                ><i class="fa-solid fa-house"></i> <span>Home</span></a
+              >
+            </li>
+            <li>
+              <a href="#"
+                ><i class="fa-solid fa-hotel"></i> <span>Rooms</span></a
+              >
+            </li>
+            <li>
+              <a href="#"
+                ><i class="fa-solid fa-users"></i> <span>Clients</span></a
+              >
+            </li>
+            <li>
+              <a href="#"
+                ><i class="fa-brands fa-servicestack"></i>
+                <span>Services</span></a
+              >
+            </li>
+            <li>
+              <a href="#">
+                <i class="fa-solid fa-gear"></i> <span>Settings</span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        <button class="log-out-btn">
+          <i class="fa-solid fa-right-from-bracket"></i> log out
+        </button>
+      </div>
+      <div class="page-content">
+        <!-- ============Registration Form ======================== -->
+        <div class="form-container">
+          <header>Client Registration</header>
+          <form action="" class="reg-form">
+            <section class="division personal-info">
+              <span class="title">Personal Info</span>
+              <div class="fields">
+                <div class="reg fname-reg">
+                  <label for="fname">First Name</label>
+                  <input
+                    type="text"
+                    name="firstName"
+                    id="fname"
+                    class="input fname"
+                    placeholder="First Name"
+                    required
+                  />
+                </div>
+                <div class="reg lname-reg">
+                  <label for="lname">Last Name</label>
+                  <input
+                    type="text"
+                    name="lastName"
+                    id="lname"
+                    class="input lname"
+                    placeholder="Last Name"
+                    required
+                  />
+                </div>
+                <div class="reg mname-reg">
+                  <label for="mname">Middle Name</label>
+                  <input
+                    type="text"
+                    name="middleName"
+                    id="mname"
+                    class="input mname"
+                    placeholder="Middle Name"
+                  />
+                </div>
+                <div class="reg gender-reg">
+                  <label for="gender">Gender</label>
+                  <div class="select">
+                    <select name="gender" id="gender" class="input gender">
+                      <option selected disabled>Select Gender</option>
+                      <option value="Male">Male</option>
+                      <option value="Female">Female</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="reg company-reg">
+                  <label for="company">Company</label>
+                  <input
+                    type="text"
+                    name="company"
+                    id="company"
+                    class="input company"
+                    placeholder="Company"
+                  />
+                </div>
+                <div class="reg profesional-reg">
+                  <label for="profesional">Profession</label>
+                  <input
+                    type="text"
+                    name="profesional"
+                    id="profesional"
+                    class="input profesional"
+                    placeholder="Profesional"
+                  />
+                </div>
+                <div class="reg nationality-reg">
+                  <label for="nationality">Nationality</label>
+                  <input
+                    type="text"
+                    name="nationality"
+                    id="nationality"
+                    class="input nationality"
+                    placeholder="Nationality"
+                  />
+                </div>
+                <div class="reg ps#-reg">
+                  <label for="ps#">PS/ID#</label>
+                  <input
+                    type="text"
+                    name="idNumber"
+                    id="ps#"
+                    class="input ps#"
+                    placeholder="PS or ID #"
+                    required
+                  />
+                </div>
+                <div class="reg dob-reg">
+                  <label for="dob">Date of Birth</label>
+                  <input
+                    type="date"
+                    name="dob"
+                    id="dob"
+                    class="input dob"
+                    placeholder="Date of Birth"
+                  />
+                </div>
+              </div>
+            </section>
+            <section class="division contact-info">
+              <span class="title">Contact Info</span>
+              <div class="fields">
+                <div class="reg phone#-reg">
+                  <label for="phone#">Phone Number</label>
+                  <input
+                    type="text"
+                    name="phoneNumber"
+                    id="phone#"
+                    class="input phone#"
+                    placeholder="Phone Number"
+                    required
+                  />
+                </div>
+                <div class="reg email-reg">
+                  <label for="email">Email Address</label>
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    class="input email"
+                    placeholder="Email Address"
+                    required
+                  />
+                </div>
+              </div>
+            </section>
+            <section class="division address-info">
+              <span class="title">Address Details</span>
+              <div class="fields">
+                <div class="reg country-reg">
+                  <label for="country">Country</label>
+                  <input
+                    type="text"
+                    name="country"
+                    id="country"
+                    class="input country"
+                    placeholder="country"
+                  />
+                </div>
+                <div class="reg city-reg">
+                  <label for="city">City</label>
+                  <input
+                    type="text"
+                    name="city"
+                    id="city"
+                    class="input city"
+                    placeholder="City"
+                  />
+                </div>
+                <div class="reg state-reg">
+                  <label for="state">State</label>
+                  <input
+                    type="text"
+                    name="state"
+                    id="state"
+                    class="input state"
+                    placeholder="State"
+                  />
+                </div>
+              </div>
+            </section>
+            <section class="reg-btn">
+              <input type="submit" value="Submit" id="submit" />
+              <!-- <button type="button">Submit</button> -->
+              <button type="button" id="back-home">Back Home</button>
+            </section>
+          </form>
+        </div>
+      </div>
+    </main>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script type="module" src="../js/app.js"></script>
+  </body>
+</html>

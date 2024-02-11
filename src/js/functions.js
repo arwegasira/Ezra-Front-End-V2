@@ -184,6 +184,8 @@ export const singleClientDetails = async (url) => {
       country,
       phoneNumber,
       email,
+      idNumber,
+      _id: id,
     } = data.client
     names.innerHTML = `
     <p>${firstName}</p>
@@ -196,7 +198,7 @@ export const singleClientDetails = async (url) => {
     <div>
     <p>Nationality: ${nationality}</p>
     <p>Dob: ${dob}</p>
-    <p>Professional: ${profesional}</p>
+    <p>Profession: ${profesional}</p>
     <p>Company: ${company}</p>
     </div>
     <div>
@@ -215,6 +217,186 @@ export const singleClientDetails = async (url) => {
     openUserModal.addEventListener('click', () => {
       editUserDialog.showModal()
     })
+    editUserDialog.innerHTML = `          
+    <form action="" class="edit-client-form">
+            <div class="edit-client id-pc-edit">
+              <label for="id-pc">ID/PC #</label>
+              <input
+                type="text"
+                name="idNumber"
+                id="id-pc"
+                class="id-pc edit"
+                value=${idNumber}
+              />
+            </div>
+              <div class="edit-client firstName-edit">
+              <label for="firstName">First Name</label>
+              <input
+                type="text"
+                name="firstName"
+                id="firstName"
+                class="firstName edit"
+                value=${firstName}
+              />
+            </div>
+             <div class="edit-client middleName-edit">
+              <label for="middleName">Middle Name</label>
+              <input
+                type="text"
+                name="middleName"
+                id="middleName"
+                value=${middleName}
+                class="middleName edit"
+              />
+            </div>
+
+            <div class="edit-client lastName-edit">
+              <label for="lastName">Last Name</label>
+              <input
+                type="text"
+                name="lastName"
+                id="lastName"
+                value=${lastName}
+                class="lastName edit"
+              />
+            </div>
+
+            <div class="edit-client phone-edit">
+              <label for="phone">Phone Number</label>
+              <input
+                type="text"
+                name="phoneNumber"
+                id="phone"
+                value=${phoneNumber}
+                class="phone edit"
+              />
+            </div>
+
+            <div class="edit-client email-edit">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                name="email"
+                id="email"
+                value=${email}
+                class="email edit"
+              />
+            </div>
+
+            <div class="edit-client profession-edit">
+              <label for="profession">Profession</label>
+              <input
+                type="text"
+                name="profesional"
+                id="profession"
+                value=${profesional}
+                class="profession edit"
+              />
+            </div>
+
+              <div class="edit-client company-edit">
+              <label for="company">Company</label>
+              <input
+                type="text"
+                name="company"
+                id="company"
+                value=${company}
+                class="company edit"
+              />
+            </div>
+
+            <div class="edit-client nationality-edit">
+              <label for="nationality">Nationality</label>
+              <input
+                type="text"
+                name="nationality"
+                id="nationality"
+                value=${nationality}
+                class="nationality edit"
+              />
+            </div>
+            
+           <div class="edit-client city-edit">
+              <label for="city">City</label>
+              <input
+                type="text"
+                name="city"
+                id="city"
+                value=${city}
+                class="city edit"
+              />
+            </div>
+
+             <div class="edit-client state-edit">
+              <label for="state">State</label>
+              <input
+                type="text"
+                name="state"
+                id="state"
+                value=${state}
+                class="state edit"
+              />
+            </div>
+            
+             <div class="edit-client county-edit">
+              <label for="county">County</label>
+              <input
+                type="text"
+                name="country"
+                id="county"
+                value=${country}
+                class="county edit"
+              />
+            </div>
+
+
+
+            <div class="edit-client submit-btn">
+                <input
+                type="submit"
+                name="cancel"
+                id="cancel-edit"
+                class="cancel"
+                value="Cancel"
+              />
+              <input
+                type="submit"
+                name="submit"
+                id="submit-edit"
+                class="submit"
+                value="Save"
+              />
+
+            </div>
+            
+          </form>`
+
+    document
+      .querySelector('.edit-user .edit-client-form')
+      .addEventListener('click', async (e) => {
+        if (e.target.id === 'submit-edit') {
+          e.preventDefault()
+          let formData = new FormData(e.currentTarget)
+          formData = Object.fromEntries(formData)
+          const url = `${process.env.API_URL_DEV}/client/editclient/${id}`
+          const { data, status, headers, error } = await apiCall(
+            url,
+            'PATCH',
+            formData
+          )
+          if (status === 200) {
+            // close modal
+            editUserDialog.close()
+            window.location.reload()
+          }
+          console.log(status)
+        }
+        if (e.target.id === 'cancel-edit') {
+          e.preventDefault()
+          editUserDialog.close()
+          window.location.reload()
+        }
+      })
     console.log(data)
   }
   return data

@@ -870,7 +870,62 @@ textarea {
 .client-main .page-content .profile-details > div p {
   margin-bottom: 0.3rem;
 }
-
+.client-main .page-content .profile .names .edit-user {
+  border: none;
+  padding: clamp(1rem, 3vw, 2rem);
+  box-shadow: var(--box-shadow-md);
+  border-radius: 0.4rem;
+}
+.client-main .page-content .profile .names .edit-user form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
+  gap: 0.3rem;
+}
+.client-main .page-content .profile .names .edit-user form input {
+  padding: 0.3rem;
+  font-size: 1rem;
+  border: 1px solid var(--grey-timberwolf);
+  border-radius: 0.2rem;
+  color: var(--black-primary);
+}
+.client-main .page-content .profile .names .edit-user form .edit-client {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.client-main .page-content .profile .names .edit-user form .submit-btn {
+  flex-direction: row;
+  gap: 1rem;
+  margin-top: 1rem;
+  justify-content: center;
+}
+.client-main .page-content .profile .names .edit-user form .submit-btn input {
+  padding: 0.5rem 2rem;
+  background-color: var(--blue-midnight);
+  color: var(--grey-timberwolf);
+  cursor: pointer;
+  transition: transform 0.2s ease-in;
+}
+.client-main
+  .page-content
+  .profile
+  .names
+  .edit-user
+  form
+  .submit-btn
+  input:hover {
+  transform: scale(1.1);
+}
+.client-main
+  .page-content
+  .profile
+  .names
+  .edit-user
+  form
+  .submit-btn
+  :nth-child(1) {
+  background-color: var(--black-oliver);
+}
 /* ================ CLIENT DETAIL PAGE ================================= */
 
 /* ======================= MEDIA QUERY======================== */
@@ -938,13 +993,6 @@ textarea {
   .reg-main .page-content .form-container form .reg-btn {
     grid-template-columns: repeat(2, 12rem);
   }
-  /*====================CLIENT DETAILS PAGE=================== */
-  .client-main .page-content .profile .names .edit-user {
-    width: 80%;
-    max-width: 50rem;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
 }
 @media (min-width: 62rem) {
   /* ======= HOME PAGE SEARCH FORM  */
@@ -962,5 +1010,12 @@ textarea {
     border-bottom: none;
     border-right: 1px solid var(--grey-timberwolf);
     padding: 0.5 1rem 0.5rem 0.5rem;
+  }
+  .client-main .page-content .profile .names .edit-user {
+    width: 80%;
+    max-width: 50rem;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 }

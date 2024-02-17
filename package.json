@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "source": [
+    "./src/html/index.html",
     "./src/html/login.html",
     "./src/html/verify-account.html",
     "./src/html/home.html",

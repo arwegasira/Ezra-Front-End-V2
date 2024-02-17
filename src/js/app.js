@@ -12,6 +12,11 @@ dotenv.config()
 // Window location
 const locationWin = window.location.href
 
+// =============== INDEX =============================
+if (window.location.pathname === '/') {
+  // to be added redirect to the home page if user is logged in or login page if not
+  window.location.href = '/home.html'
+}
 //======  LOGIN FORM =============================
 if (locationWin.includes('login.html')) {
   //UI Variables

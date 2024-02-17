@@ -926,6 +926,38 @@ textarea {
   :nth-child(1) {
   background-color: var(--black-oliver);
 }
+.accommodation {
+  margin: 3rem 0;
+}
+.accommodation .tabs {
+  list-style: none;
+  display: flex;
+  justify-content: flex-start;
+  border: 1px solid var(--grey-timberwolf);
+  height: 3rem;
+}
+.accommodation .tabs .tab {
+  width: 50%;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  font-size: clamp(1.2rem, 3vw, 2rem);
+}
+.tabs li:last-child {
+  /* border-left: 1px solid var(--grey-timberwolf); */
+}
+.accommodation .tabs .tab.active {
+  background-color: var(--blue-saphire);
+  color: var(--grey-timberwolf);
+}
+[data-tab-content] {
+  display: none;
+  margin: 2rem 0;
+  background-color: red;
+}
+.active[data-tab-content] {
+  display: block;
+}
 /* ================ CLIENT DETAIL PAGE ================================= */
 
 /* ======================= MEDIA QUERY======================== */

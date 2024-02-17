@@ -1,3 +1,5 @@
+const moment = require('moment')
+
 // alert div
 const alertdiv = (width, message, className, parent, child) => {
   const div = document.createElement('div')
@@ -170,6 +172,7 @@ export const singleClientDetails = async (url) => {
     const profileDetails = document.querySelector(
       '.page-content .profile-details'
     )
+    const accommodation = document.querySelector('.accommodation')
 
     const {
       firstName,
@@ -186,6 +189,8 @@ export const singleClientDetails = async (url) => {
       email,
       idNumber,
       _id: id,
+      activeAccommodation,
+      activeServices,
     } = data.client
     names.innerHTML = `
     <p>${firstName}</p>
@@ -197,7 +202,7 @@ export const singleClientDetails = async (url) => {
     profileDetails.innerHTML = `
     <div>
     <p>Nationality: ${nationality}</p>
-    <p>Dob: ${dob}</p>
+    <p>Dob: ${moment(dob).format('DD/MM/YYYY')}</p>
     <p>Profession: ${profesional}</p>
     <p>Company: ${company}</p>
     </div>
@@ -371,6 +376,7 @@ export const singleClientDetails = async (url) => {
             
           </form>`
 
+    //Save / cancel edit
     document
       .querySelector('.edit-user .edit-client-form')
       .addEventListener('click', async (e) => {
@@ -397,6 +403,111 @@ export const singleClientDetails = async (url) => {
           window.location.reload()
         }
       })
+
+    //accommodation tabs
+    accommodation.innerHTML = `
+    <ul class="tabs">
+    <li data-tab-target="#current" class="tab active">Current</li>
+    <li data-tab-target="#history" class="tab">History</li>
+    </ul>
+    <div class="tab-content">
+    <div data-tab-content class="active" id="current">
+    
+   </div>
+    <div data-tab-content id="history">
+    
+    </div>
+    </div>
+    `
+    const tabs = document.querySelectorAll('[data-tab-target]')
+    const tabContents = document.querySelectorAll('[data-tab-content]')
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', (e) => {
+        const currentTab = document.querySelector(tab.dataset.tabTarget)
+        tabContents.forEach((content) => content.classList.remove('active'))
+        currentTab.classList.add('active')
+        tabs.forEach((tab) => tab.classList.remove('active'))
+        tab.classList.add('active')
+      })
+    })
+    const currentTab = document.querySelector('#current')
+
+    const activeAccommodationDiv = document.createElement('div')
+    activeAccommodationDiv.classList.add('active-accommodations')
+
+    if (activeAccommodation.length) {
+      const { startDate, endDate, roomDetails, unitPrice, totalCost } =
+        activeAccommodation[0]
+      activeAccommodationDiv.innerHTML = `
+      <p>Active Accommodation</p>
+      <ul>
+      <li>
+      <span>From</span>
+      <span>${moment(startDate).format('MMM Do YY')}</span>
+      </li>
+      <li>
+      <span>To</span>
+      <span>${moment(endDate).format('MMM Do YY')}</span>
+      </li>
+      <li>
+      <span>Night(s)</span>
+      <span>${totalCost / unitPrice}</span>
+      </li>
+       <li>
+      <span>Room</span>
+      <span>${roomDetails.name}</span>
+      </li>
+     <li>
+      <span>Room Type</span>
+      <span>${roomDetails.roomType}</span>
+      </li>
+      <li>
+      <span>Unit Price</span>
+      <span>${unitPrice}</span>
+      </li>
+      <li>
+      <span>Total</span>
+      <span>${totalCost}</span>
+      </li>
+      <li>
+      <span>Paid</span>
+      <input type="checkbox" name="paid" id="paid"/>
+      </li>
+       <li><button>check out</button></li>
+      <li><button><i class="fa-regular fa-pen-to-square"></i></button></li>
+      </ul>
+      `
+    } else {
+      const button = document.createElement('button')
+      button.innerText = 'Add New'
+      activeAccommodationDiv.appendChild(button)
+    }
+    const servicesDiv = document.createElement('div')
+    servicesDiv.classList.add('active-services')
+    const servicesTitle = document.createElement('p')
+    servicesTitle.innerText = 'Active Services'
+    servicesDiv.append(servicesTitle)
+    const button = document.createElement('button')
+    button.innerText = 'Add New'
+    servicesDiv.appendChild(button)
+    const serviceList = document.createElement('ul')
+    serviceList.classList.add('active-services-list')
+    servicesDiv.appendChild(serviceList)
+    activeServices.forEach((service) => {
+      const li = document.createElement('li')
+      li.innerHTML = `
+      <span>Service</span>
+      <span>${service.service}</span>
+      <span>Amount</span>
+      <span>${service.total}</span>
+      <button><i class="fa-regular fa-pen-to-square"></i></button>
+      `
+      serviceList.appendChild(li)
+    })
+    currentTab.appendChild(activeAccommodationDiv)
+    currentTab.appendChild(servicesDiv)
+
     console.log(data)
   }
   return data

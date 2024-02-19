@@ -114,6 +114,8 @@ const searchClients = async (searchData, form, clientList) => {
   //API request
   try {
     //add loading
+    console.log('We made it this far')
+    console.log(process.env.API_URL_DEV)
     const loader = spinningLoader()
     clientList.appendChild(loader)
     const { data, headers, status } = await axios({
@@ -121,6 +123,7 @@ const searchClients = async (searchData, form, clientList) => {
       url: `${process.env.API_URL_DEV}/client/clients?idNumber=${searchData.idNumber}&&firstName=${searchData.firstName}&&lastName=${searchData.lastName}&&email=${searchData.email}&&arrivalDate=${searchData.arrivalDate}&&phoneNumber=${searchData.phoneNumber}`,
       data: searchData,
     })
+    console.log(data)
     return data.clients
   } catch (error) {
     //rebuild error div

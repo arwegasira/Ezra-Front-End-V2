@@ -70,7 +70,7 @@ if (locationWin.includes('home.html')) {
   expandClientDiv.forEach((el) => {
     el.addEventListener('click', (e) => {
       console.log(el.parentElement.parentElement.nextElementSibling)
-      nextsib = el.parentElement.parentElement.nextElementSibling
+      const nextsib = el.parentElement.parentElement.nextElementSibling
       nextsib.classList.toggle('expanded')
       el.classList.toggle('rotate')
     })

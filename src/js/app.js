@@ -69,7 +69,7 @@ if (locationWin.includes('home.html')) {
   // expand client card fx
   expandClientDiv.forEach((el) => {
     el.addEventListener('click', (e) => {
-      console.log(el.parentElement.parentElement)
+      console.log(el.parentElement.parentElement.nextElementSibling)
       nextsib = el.parentElement.parentElement.nextElementSibling
       nextsib.classList.toggle('expanded')
       el.classList.toggle('rotate')

@@ -143,12 +143,12 @@ body {
   color: var(--black-primary);
 }
 .verify-account-container .verify-account-form input[type='password'] {
-  padding: 0.5rem 0.3rem;
+  padding: 0.5rem;
   border: none;
   border-radius: 0.2rem;
   background-color: rgba(0, 0, 0, 0.3);
   color: var(--black-primary);
-  font-size: clamp(0.7rem, 2vw, 1rem);
+  font-size: 1rem;
 }
 .verify-account-container .verify-account-form input[type='password']:focus {
   outline: none;

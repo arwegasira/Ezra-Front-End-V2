@@ -126,9 +126,11 @@ if (locationWin.includes('client-registration.html')) {
 
   submitBtn.addEventListener('click', async (e) => {
     e.preventDefault()
+    e.target.disabled = true
     const formData = new FormData(regForm)
     const client = Object.fromEntries(formData)
     await newClient(client, alertObj, loaderObj, regForm)
+    e.target.disabled = false
   })
 
   backHomebtn.addEventListener('click', (e) => {

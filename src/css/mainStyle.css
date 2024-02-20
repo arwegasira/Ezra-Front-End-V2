@@ -1003,13 +1003,17 @@ textarea {
   .client-main .page-content .profile-details {
     flex-direction: row;
     flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: space-between;
+    border: 1px solid var(--grey-timberwolf);
+    padding: 0 1rem;
   }
   .client-main .page-content .profile-details > div {
     border-bottom: none;
+    width: 32%;
     border-right: 1px solid var(--grey-timberwolf);
-    padding: 0.5 1rem 0.5rem 0.5rem;
+    padding: 2rem 0;
+  }
+  .client-main .page-content .profile-details > div:last-child {
+    border: none;
   }
   .client-main .page-content .profile .names .edit-user {
     width: 80%;

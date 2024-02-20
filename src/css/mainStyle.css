@@ -55,7 +55,7 @@ body {
   align-items: center;
   row-gap: 0.7rem;
   column-gap: 2rem;
-  padding: 2rem clamp(1rem, 3vw, 2rem);
+  padding: 6rem clamp(1rem, 3vw, 2rem);
   background-color: var(--white-primary);
   overflow: hidden;
 }
@@ -70,12 +70,12 @@ body {
   border-radius: 0.4rem;
 }
 .login-container .login-form input {
-  padding: 0.7rem 0.3rem;
+  padding: 0.5rem;
   border: none;
   border-radius: 0.2rem;
   background-color: rgba(0, 0, 0, 0.2);
   color: var(--black-primary);
-  font-size: clamp(0.7rem, 2vw, 1rem);
+  font-size: 1rem;
 }
 
 .login-container .login-form input:focus {
@@ -108,15 +108,8 @@ body {
 .login-container .login-form small a:hover {
   color: var(--blue-saphire);
 }
-.login-container .login-logo {
-  width: clamp(19rem, 80vw, 30rem);
-  background-color: transparent;
-}
-.login-container .login-logo img {
-  width: 4rem;
-  display: none;
-}
-.login-container .login-logo h2 {
+
+.login-container h2 {
   text-align: center;
   text-transform: uppercase;
   padding: 0.2rem;
@@ -953,7 +946,6 @@ textarea {
 [data-tab-content] {
   display: none;
   margin: 2rem 0;
-  background-color: red;
 }
 .active[data-tab-content] {
   display: block;
@@ -975,30 +967,6 @@ textarea {
   }
 }
 @media (min-width: 50rem) {
-  /*===========LOGIN PAGE=========*/
-  .login-container {
-    padding-top: 10rem;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-  }
-  .login-container .login-logo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 15rem;
-  }
-  .login-container .login-logo img {
-    display: block;
-    width: 10rem;
-    height: 10rem;
-    border-radius: 0.5rem;
-    object-fit: cover;
-  }
-  .login-container .login-logo h2 {
-    display: none;
-  }
-
   /* ======= HOME - CLIENT LIST========== */
   .home-main
     .page-content

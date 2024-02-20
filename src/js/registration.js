@@ -14,6 +14,8 @@ export const newClient = async (client, alertObj, loaderObj, formEl) => {
       if (document.querySelector('.dotted-loader-container')) {
         document.querySelector('.dotted-loader-container').remove()
       }
+      //scroll to the top
+      window.scrollTo(0, 0)
     }
     //clear inputs
     formEl.reset()

@@ -424,7 +424,7 @@ body {
 }
 .home-main .page-content .form-container .search-form .search input {
   padding: 0.5rem;
-  font-size: 1.2rem;
+  font-size: 1rem;
   border: none;
   border-radius: 0.2rem;
   color: var(--black-primary);

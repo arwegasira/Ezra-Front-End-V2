@@ -114,7 +114,6 @@ const searchClients = async (searchData, form, clientList) => {
   //API request
   try {
     //add loading
-    console.log('We made it this far')
     console.log(process.env.API_URL_DEV)
     const loader = spinningLoader()
     clientList.appendChild(loader)
@@ -160,8 +159,13 @@ export const apiCall = async (url, method, info) => {
   }
 }
 export const singleClientDetails = async (url) => {
+  //add a spinner as script waits api result
+  const loader = spinningLoader()
+  document.querySelector('.page-content').appendChild(loader)
+
   //find client
   const { data, status, headers, error } = await apiCall(url)
+
   //if error
   if (status !== 200) {
     console.log(data)

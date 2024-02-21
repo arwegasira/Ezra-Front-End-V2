@@ -927,21 +927,24 @@ textarea {
   display: flex;
   justify-content: flex-start;
   border: 1px solid var(--grey-timberwolf);
-  height: 3rem;
+  height: 2.5rem;
+  border-radius: 0.6rem;
+  padding: 0.1rem;
 }
 .accommodation .tabs .tab {
   width: 50%;
   display: grid;
   place-items: center;
   text-align: center;
-  font-size: clamp(1.2rem, 3vw, 2rem);
+  font-size: 1.2rem;
+  border-radius: 0.5rem;
+  transition: all 0.5s ease-in;
+  cursor: pointer;
 }
-.tabs li:last-child {
-  /* border-left: 1px solid var(--grey-timberwolf); */
-}
+
 .accommodation .tabs .tab.active {
-  background-color: var(--blue-saphire);
-  color: var(--grey-timberwolf);
+  background-color: var(--black-primary);
+  color: var(--grey-light);
 }
 [data-tab-content] {
   display: none;

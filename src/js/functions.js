@@ -168,12 +168,15 @@ export const singleClientDetails = async (url) => {
 
   //if error
   if (status !== 200) {
-    console.log(data)
     const pageContent = document.querySelector('.page-content')
+    //Remove loader
+    pageContent.removeChild(loader)
     pageContent.style.height = '32rem'
     pageContent.style.display = 'flex'
     pageContent.innerHTML = `<h4 style='font-size:clamp(1.2rem,3vw,1.7rem)'>Client not found , try again.<h4>`
   } else {
+    //Remove loader
+    document.querySelector('.page-content').removeChild(loader)
     //ui variables
     const names = document.querySelector('.page-content .names')
     const profileDetails = document.querySelector(

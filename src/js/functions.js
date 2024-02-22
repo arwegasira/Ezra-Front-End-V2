@@ -450,7 +450,7 @@ export const singleClientDetails = async (url) => {
       const { startDate, endDate, roomDetails, unitPrice, totalCost } =
         activeAccommodation[0]
       activeAccommodationDiv.innerHTML = `
-      <p>Active Accommodation</p>
+      <h4>Active Accommodation</h4>
       <ul>
       <li>
       <span>From</span>
@@ -484,8 +484,11 @@ export const singleClientDetails = async (url) => {
       <span>Paid</span>
       <input type="checkbox" name="paid" id="paid"/>
       </li>
-       <li><button>check out</button></li>
-      <li><button><i class="fa-regular fa-pen-to-square"></i></button></li>
+      
+      <li>
+      <button><i class="fa-regular fa-pen-to-square"></i></button>
+      <button>check out</button>
+      </li>
       </ul>
       `
     } else {
@@ -495,7 +498,7 @@ export const singleClientDetails = async (url) => {
     }
     const servicesDiv = document.createElement('div')
     servicesDiv.classList.add('active-services')
-    const servicesTitle = document.createElement('p')
+    const servicesTitle = document.createElement('h4')
     servicesTitle.innerText = 'Active Services'
     servicesDiv.append(servicesTitle)
     const button = document.createElement('button')

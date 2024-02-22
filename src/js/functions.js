@@ -453,11 +453,11 @@ export const singleClientDetails = async (url) => {
       <h4>Active Accommodation</h4>
       <ul>
       <li>
-      <span>From</span>
+      <span>Start Date</span>
       <span>${moment(startDate).format('MMM Do YY')}</span>
       </li>
       <li>
-      <span>To</span>
+      <span>End Date</span>
       <span>${moment(endDate).format('MMM Do YY')}</span>
       </li>
       <li>
@@ -481,13 +481,13 @@ export const singleClientDetails = async (url) => {
       <span>${totalCost}</span>
       </li>
       <li>
-      <span>Paid</span>
-      <input type="checkbox" name="paid" id="paid"/>
+      <label for="paid">Paid</label>
+      <input type="checkbox" name="paid" class="paid" id="paid"/>
       </li>
       
       <li>
       <button><i class="fa-regular fa-pen-to-square"></i></button>
-      <button>check out</button>
+      <button class="checkout">check out</button>
       </li>
       </ul>
       `
@@ -521,6 +521,15 @@ export const singleClientDetails = async (url) => {
     currentTab.appendChild(activeAccommodationDiv)
     currentTab.appendChild(servicesDiv)
 
+    const checkoutBtn = document.querySelector('.checkout')
+    const paidCheckBox = document.querySelector('.paid')
+    paidCheckBox.addEventListener('click', (e) => {
+      if (e.target.checked) {
+        checkoutBtn.style.display = 'block'
+      } else {
+        checkoutBtn.style.display = 'none'
+      }
+    })
     console.log(data)
   }
   return data

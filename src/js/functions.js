@@ -494,7 +494,11 @@ export const singleClientDetails = async (url) => {
       `
     } else {
       const button = document.createElement('button')
-      button.innerText = 'Add New'
+      button.classList.add('new-accommodation-btn')
+      button.innerText = 'Add Accommodation'
+      const title = document.createElement('h4')
+      title.innerText = 'Active Accommodation'
+      activeAccommodationDiv.appendChild(title)
       activeAccommodationDiv.appendChild(button)
     }
     const servicesDiv = document.createElement('div')
@@ -503,7 +507,8 @@ export const singleClientDetails = async (url) => {
     servicesTitle.innerText = 'Active Services'
     servicesDiv.append(servicesTitle)
     const button = document.createElement('button')
-    button.innerText = 'Add New'
+    button.classList.add('new-service-btn')
+    button.innerText = 'Add Service'
     servicesDiv.appendChild(button)
     const serviceList = document.createElement('ul')
     serviceList.classList.add('active-services-list')
@@ -511,11 +516,15 @@ export const singleClientDetails = async (url) => {
     activeServices.forEach((service) => {
       const li = document.createElement('li')
       li.innerHTML = `
+      <div>
       <span>Service</span>
       <span>${service.service}</span>
+      </div>
+      <div>
       <span>Amount</span>
       <span>${service.total}</span>
-      <button><i class="fa-regular fa-pen-to-square"></i></button>
+      </div>
+    <button><i class="fa-regular fa-pen-to-square"></i></button>
       `
       serviceList.appendChild(li)
     })

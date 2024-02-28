@@ -481,7 +481,7 @@ export const singleClientDetails = async (url) => {
       <span>${totalCost}</span>
       </li>
       <li>
-      <label for="paid">Paid</label>
+      <label for ="paid" >Paid</label>
       <input type="checkbox" name="paid" class="paid" id="paid"/>
       </li>
       

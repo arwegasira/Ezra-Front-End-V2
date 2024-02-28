@@ -972,11 +972,27 @@ textarea {
   padding: 0.5rem 0;
 }
 .active-accommodations ul li .paid {
-  -webkit-transform: scale(1.5, 1.5);
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 1.2rem;
+  height: 1.2rem;
+  border: 1px solid var(--grey-timberwolf);
+  position: relative;
 }
 .active-accommodations ul li .paid:checked {
-  accent-color: var(--blue-midnight);
+  background-color: var(--blue-midnight);
 }
+.active-accommodations ul li .paid:checked::after {
+  content: '\2713'; /* Unicode character for checkmark */
+  font-size: 1rem; /* adjust size of checkmark */
+  color: white; /* color of checkmark */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* center the checkmark */
+}
+
 .active-accommodations ul li button {
   background-color: transparent;
   border: none;
@@ -1063,5 +1079,22 @@ textarea {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+  .active-accommodations ul {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+  }
+  .active-accommodations ul li {
+    border: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+  }
+  .active-accommodations ul li > :nth-child(1) {
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  .active-accommodations ul li > :last-child {
+    font-size: 1rem;
   }
 }

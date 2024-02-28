@@ -487,6 +487,7 @@ export const singleClientDetails = async (url) => {
       
       <li>
       <button><i class="fa-regular fa-pen-to-square"></i></button>
+      <button class="avail-room">Avail Room</button>
       <button class="checkout">check out</button>
       </li>
       </ul>

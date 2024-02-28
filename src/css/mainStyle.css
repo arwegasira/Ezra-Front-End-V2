@@ -979,6 +979,9 @@ textarea {
   height: 1.2rem;
   border: 1px solid var(--grey-timberwolf);
   position: relative;
+  outline: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
 }
 .active-accommodations ul li .paid:checked {
   background-color: var(--blue-midnight);
@@ -999,13 +1002,17 @@ textarea {
   cursor: pointer;
   font-size: 1.3rem;
 }
-.active-accommodations ul li .checkout {
+.active-accommodations ul li .checkout,
+.active-accommodations ul li .avail-room {
   font-size: 1rem;
   background-color: var(--blue-midnight);
   color: var(--white-primary);
   padding: 0.3rem 0.5rem;
   border-radius: 0.5rem;
   display: none;
+}
+.active-accommodations ul li .avail-room {
+  display: block;
 }
 
 /* ================ CLIENT DETAIL PAGE ================================= */
@@ -1082,7 +1089,10 @@ textarea {
   }
   .active-accommodations ul {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(7rem, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(5rem, 1fr));
+    margin: 2rem 0;
+    padding: 1rem;
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   }
   .active-accommodations ul li {
     border: none;
@@ -1090,11 +1100,18 @@ textarea {
     flex-direction: column;
     gap: 0.3rem;
   }
+
   .active-accommodations ul li > :nth-child(1) {
     font-weight: bold;
-    font-size: 1.1rem;
+    font-size: 1rem;
   }
   .active-accommodations ul li > :last-child {
-    font-size: 1rem;
+    font-size: 0.9rem;
+  }
+  .active-accommodations ul li:last-child {
+    gap: 0.5rem;
+  }
+  .active-accommodations ul li:last-child button {
+    font-size: 0.9rem;
   }
 }

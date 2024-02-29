@@ -843,7 +843,8 @@ textarea {
 .client-main .page-content .profile .names .open-modal i {
   font-size: 1.3rem;
 }
-.client-main .page-content .profile .names .edit-user {
+.client-main .page-content .profile .names .edit-user,
+.add-client-modal {
   position: absolute;
   width: 90vw;
   margin: 0 auto;
@@ -863,7 +864,8 @@ textarea {
 .client-main .page-content .profile-details > div p {
   margin-bottom: 0.3rem;
 }
-.client-main .page-content .profile .names .edit-user {
+.client-main .page-content .profile .names .edit-user,
+.add-client-modal {
   border: none;
   padding: clamp(1rem, 3vw, 2rem);
   box-shadow: var(--box-shadow-md);
@@ -1120,7 +1122,8 @@ textarea {
   .client-main .page-content .profile-details > div:last-child {
     border: none;
   }
-  .client-main .page-content .profile .names .edit-user {
+  .client-main .page-content .profile .names .edit-user,
+  .add-client-modal {
     width: 80%;
     max-width: 50rem;
     top: 50%;

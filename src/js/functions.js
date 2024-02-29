@@ -498,8 +498,11 @@ export const singleClientDetails = async (url) => {
       button.innerText = 'Add Accommodation'
       const title = document.createElement('h4')
       title.innerText = 'Active Accommodation'
+      const addClientDialog = document.createElement('dialog')
+      addClientDialog.classList.add('add-client-modal')
       activeAccommodationDiv.appendChild(title)
       activeAccommodationDiv.appendChild(button)
+      activeAccommodationDiv.appendChild(addClientDialog)
     }
     const servicesDiv = document.createElement('div')
     servicesDiv.classList.add('active-services')
@@ -533,13 +536,91 @@ export const singleClientDetails = async (url) => {
 
     const checkoutBtn = document.querySelector('.checkout')
     const paidCheckBox = document.querySelector('.paid')
-    paidCheckBox.addEventListener('click', (e) => {
-      if (e.target.checked) {
-        checkoutBtn.style.display = 'block'
-      } else {
-        checkoutBtn.style.display = 'none'
-      }
-    })
+    if (paidCheckBox) {
+      paidCheckBox.addEventListener('click', (e) => {
+        if (e.target.checked) {
+          checkoutBtn.style.display = 'block'
+        } else {
+          checkoutBtn.style.display = 'none'
+        }
+      })
+    }
+
+    const newAccommodation = document.querySelector('.new-accommodation-btn')
+    if (newAccommodation) {
+      newAccommodation.addEventListener('click', () => {
+        const addClientDialog = document.querySelector('.add-client-modal')
+        addClientDialog.showModal()
+        //Build add client dialog
+        addClientDialog.innerHTML = `
+        <h4>New Accommodation</h4>
+        <form action="" class="edit-client-form">
+            <div class="new-acc new-acc-start">
+              <label for="startDate">Start Date</label>
+              <input
+                type="date"
+                name="startDate"
+                id="startDate"
+                class="new-acc-startDate"
+              />
+            </div>
+             <div class="new-acc new-acc-end">
+              <label for="endDate">Start Date</label>
+              <input
+                type="date"
+                name="endDate"
+                id="endDate"
+                class="new-acc-endDate"
+              />
+            </div>
+
+             <div class="new-acc new-acc-room">
+              <label for="room">Room</label>
+              <input
+                type="text"
+                name="room"
+                id="room"
+                class="new-acc-room"
+              />
+            </div>
+             <div class="new-acc new-acc-unitPrice">
+              <span>Unit Price</span>
+             <span>-</span>
+            </div>
+
+             <div class="new-acc new-acc-overridePrice">
+              <label for="overridePrice">Override Price</label>
+              <input
+                type="Number"
+                name="overridePrice"
+                id="overridePrice"
+                class="new-acc-overridePrice"
+              />
+            </div>
+
+            <div class="edit-client submit-btn">
+                <input
+                type="submit"
+                name="cancel"
+                id="cancel-edit"
+                class="cancel"
+                value="Cancel"
+              />
+              <input
+                type="submit"
+                name="submit"
+                id="submit-edit"
+                class="submit"
+                value="Save"
+              />
+
+            </div>
+            
+          </form>
+
+        `
+      })
+    }
     console.log(data)
   }
   return data

@@ -158,6 +158,12 @@ export const apiCall = async (url, method, info) => {
     }
   }
 }
+const availableRooms = async () => {
+  const { data, status, headers, error } = await apiCall(
+    `${process.env.API_URL_DEV}/rooms/availableRooms`
+  )
+  return { data, status, headers, error }
+}
 export const singleClientDetails = async (url) => {
   //add a spinner as script waits api result
   const loader = spinningLoader()
@@ -576,7 +582,8 @@ export const singleClientDetails = async (url) => {
 
              <div class="new-acc new-acc-room">
               <label for="room">Choose Room</label>
-              <select name="room" id="room" class="new-acc-room">
+              <select name="room" id="room" class="new-acc-room-selector">
+              <option value="" disabled>Select Room</option>
               </select>
             </div>
              <div class="new-acc new-acc-unitPrice">
@@ -622,8 +629,38 @@ export const singleClientDetails = async (url) => {
           </form>
 
         `
+        const roomSelector = document.querySelector('.new-acc-room-selector')
+        roomSelector.addEventListener('focus', async (e) => {
+          e.target.innerHTML = `<option value=" "selected disabled></option>`
+          const { data, status, headers, error } = await availableRooms()
+          if (error) {
+            //disable submit
+            const submitBtn = document.querySelector(
+              '.new-accommodation.submit-btn .submit'
+            )
+            submitBtn.disabled = true
+            // const optionTitle = document.createElement('option')
+            // optionTitle.innerHTML = 'Select Room'
+            // optionTitle.disabled = true
+            // roomSelector.appendChild(optionTitle)
+
+            const msg = error.data || 'Something went wrong'
+            const option = document.createElement('option')
+            option.innerHTML = msg
+            roomSelector.appendChild(option)
+            return
+          } else {
+            data.rooms.forEach((room) => {
+              const option = document.createElement('option')
+              option.value = room.name
+              option.innerHTML = room.name
+              roomSelector.appendChild(option)
+            })
+          }
+        })
       })
     }
+
     console.log(data)
   }
   return data

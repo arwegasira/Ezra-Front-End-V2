@@ -583,7 +583,7 @@ export const singleClientDetails = async (url) => {
              <div class="new-acc new-acc-room">
               <label for="room">Choose Room</label>
               <select name="room" id="room" class="new-acc-room-selector">
-              <option value="" disabled>Select Room</option>
+      
               </select>
             </div>
              <div class="new-acc new-acc-unitPrice">
@@ -633,7 +633,7 @@ export const singleClientDetails = async (url) => {
         roomSelector.addEventListener('focus', async (e) => {
           e.target.innerHTML = `<option value=" "selected disabled></option>`
           const { data, status, headers, error } = await availableRooms()
-          if (error) {
+          if (status !== 200) {
             //disable submit
             const submitBtn = document.querySelector(
               '.new-accommodation.submit-btn .submit'

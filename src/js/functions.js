@@ -554,7 +554,7 @@ export const singleClientDetails = async (url) => {
         //Build add client dialog
         addClientDialog.innerHTML = `
         <h4>New Accommodation</h4>
-        <form action="" class="edit-client-form">
+        <form action="" class="new-accommodation-form">
             <div class="new-acc new-acc-start">
               <label for="startDate">Start Date</label>
               <input
@@ -565,7 +565,7 @@ export const singleClientDetails = async (url) => {
               />
             </div>
              <div class="new-acc new-acc-end">
-              <label for="endDate">Start Date</label>
+              <label for="endDate">End Date</label>
               <input
                 type="date"
                 name="endDate"
@@ -575,17 +575,20 @@ export const singleClientDetails = async (url) => {
             </div>
 
              <div class="new-acc new-acc-room">
-              <label for="room">Room</label>
-              <input
-                type="text"
-                name="room"
-                id="room"
-                class="new-acc-room"
-              />
+              <label for="room">Choose Room</label>
+              <select name="room" id="room" class="new-acc-room">
+              </select>
             </div>
              <div class="new-acc new-acc-unitPrice">
-              <span>Unit Price</span>
-             <span>-</span>
+              <label for="unitPrice">Unit Price</label>
+              <input
+                type="Number"
+                name="unitPrice"
+                id="unitPrice"
+                class="new-acc-unitPrice"
+                disabled =${true}
+                style="background-color:#E8E9EB"
+              />
             </div>
 
              <div class="new-acc new-acc-overridePrice">
@@ -598,7 +601,7 @@ export const singleClientDetails = async (url) => {
               />
             </div>
 
-            <div class="edit-client submit-btn">
+            <div class="new-accommodation submit-btn">
                 <input
                 type="submit"
                 name="cancel"

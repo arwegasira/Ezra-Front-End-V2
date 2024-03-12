@@ -160,7 +160,7 @@ export const apiCall = async (url, method, info) => {
 }
 const availableRooms = async () => {
   const { data, status, headers, error } = await apiCall(
-    `${process.env.API_URL_DEV}/rooms/availableRooms`
+    `${process.env.API_URL_DEV}/rooms/available`
   )
   return { data, status, headers, error }
 }
@@ -644,7 +644,9 @@ export const singleClientDetails = async (url) => {
             // optionTitle.disabled = true
             // roomSelector.appendChild(optionTitle)
 
-            const msg = error.data || 'Something went wrong'
+            const msg =
+              status === 401 ? 'No Room available' : 'Something went wrong'
+            console.error(msg)
             const option = document.createElement('option')
             option.innerHTML = msg
             roomSelector.appendChild(option)

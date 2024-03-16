@@ -153,8 +153,8 @@ export const apiCall = async (url, method, info) => {
   } catch (error) {
     return {
       error: error.response,
-      status: error.response.status,
-      data: error.response.data,
+      status: error?.response?.status,
+      data: error?.response?.data,
     }
   }
 }
@@ -588,7 +588,7 @@ export const singleClientDetails = async (url) => {
 
              <div class="new-acc new-acc-room">
               <label for="room">Choose Room</label>
-              <select name="room" id="room" class="new-acc-room-selector">
+              <select name="roomName" id="room" class="new-acc-room-selector">
       
               </select>
             </div>
@@ -608,7 +608,7 @@ export const singleClientDetails = async (url) => {
               <label for="overridePrice">Override Price</label>
               <input
                 type="Number"
-                name="overridePrice"
+                name="price"
                 id="overridePrice"
                 class="new-acc-overridePrice"
               />
@@ -618,14 +618,14 @@ export const singleClientDetails = async (url) => {
                 <input
                 type="submit"
                 name="cancel"
-                id="cancel-edit"
+                id="cancel-newAcc"
                 class="cancel"
                 value="Cancel"
               />
               <input
                 type="submit"
                 name="submit"
-                id="submit-edit"
+                id="submit-newAcc"
                 class="submit"
                 value="Save"
               />
@@ -677,6 +677,53 @@ export const singleClientDetails = async (url) => {
           const { data, status, error } = await roomPrice(room)
           unitPrice.value = data.price
         })
+        //save or cancel
+        document
+          .querySelector('.new-accommodation-form')
+          .addEventListener('click', async (e) => {
+            if (e.target.id === 'submit-newAcc') {
+              e.preventDefault()
+              let formData = new FormData(e.currentTarget)
+              formData = Object.fromEntries(formData)
+              formData.clientId = id
+              formData.startDate = moment(formData.startDate).format(
+                'DD/MM/YYYY'
+              )
+              formData.endDate = moment(formData.endDate).format('DD/MM/YYYY')
+              console.log(formData)
+              const url = `${process.env.API_URL_DEV}/client/addaccommodation`
+              const { data, status, headers, error } = await apiCall(
+                url,
+                'POST',
+                formData
+              )
+
+              if (status === 200) {
+                // close modal
+                editUserDialog.close()
+                window.location.reload()
+              } else {
+                errorDialogExist = document.querySelector(
+                  '.add-client-modal .alert.danger'
+                )
+                if (!errorDialogExist) {
+                  //show error message
+                  const child = document.querySelector('.add-client-title')
+                  const msg = data || 'Something went wrong'
+                  alertdiv('100%', msg, 'danger', addClientDialog, child)
+                  const alertEl = document.querySelector(
+                    '.add-client-modal .alert.danger'
+                  )
+                  //remove error message after 5seconds
+                  removeElement(alertEl, 5000)
+                }
+              }
+            }
+            if (e.target.id === 'cancel-newAcc') {
+              e.preventDefault()
+              addClientDialog.close()
+            }
+          })
       })
     }
 

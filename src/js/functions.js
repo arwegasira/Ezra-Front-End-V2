@@ -160,7 +160,13 @@ export const apiCall = async (url, method, info) => {
 }
 const availableRooms = async () => {
   const { data, status, headers, error } = await apiCall(
-    `${process.env.API_URL_DEV}/rooms/available`
+    `${process.env.API_URL_DEV}/rooms/availableRooms`
+  )
+  return { data, status, headers, error }
+}
+const roomPrice = async (name) => {
+  const { data, status, headers, error } = await apiCall(
+    `${process.env.API_URL_DEV}/rooms/roomPrice/${name}`
   )
   return { data, status, headers, error }
 }
@@ -559,7 +565,7 @@ export const singleClientDetails = async (url) => {
         addClientDialog.showModal()
         //Build add client dialog
         addClientDialog.innerHTML = `
-        <h4>New Accommodation</h4>
+        <h4 class ='add-client-title'>New Accommodation</h4>
         <form action="" class="new-accommodation-form">
             <div class="new-acc new-acc-start">
               <label for="startDate">Start Date</label>
@@ -567,7 +573,7 @@ export const singleClientDetails = async (url) => {
                 type="date"
                 name="startDate"
                 id="startDate"
-                class="new-acc-startDate"
+                class="new-acc-startDate-input"
               />
             </div>
              <div class="new-acc new-acc-end">
@@ -592,7 +598,7 @@ export const singleClientDetails = async (url) => {
                 type="Number"
                 name="unitPrice"
                 id="unitPrice"
-                class="new-acc-unitPrice"
+                class="new-acc-unitPrice-input"
                 disabled =${true}
                 style="background-color:#E8E9EB"
               />
@@ -631,6 +637,8 @@ export const singleClientDetails = async (url) => {
         `
         const roomSelector = document.querySelector('.new-acc-room-selector')
         roomSelector.addEventListener('focus', async (e) => {
+          const unitPrice = document.querySelector('.new-acc-unitPrice-input')
+          const startDate = document.querySelector('.new-acc-startDate-input')
           e.target.innerHTML = `<option value=" "selected disabled></option>`
           const { data, status, headers, error } = await availableRooms()
           if (status !== 200) {
@@ -638,18 +646,21 @@ export const singleClientDetails = async (url) => {
             const submitBtn = document.querySelector(
               '.new-accommodation.submit-btn .submit'
             )
-            submitBtn.disabled = true
-            // const optionTitle = document.createElement('option')
-            // optionTitle.innerHTML = 'Select Room'
-            // optionTitle.disabled = true
-            // roomSelector.appendChild(optionTitle)
 
-            const msg =
-              status === 401 ? 'No Room available' : 'Something went wrong'
-            console.error(msg)
-            const option = document.createElement('option')
-            option.innerHTML = msg
-            roomSelector.appendChild(option)
+            const msg = error?.data || 'Something went wrong'
+            //add error notification
+            const child = document.querySelector('.add-client-title')
+            const errorParagraph = document.createElement('p')
+            errorParagraph.className += 'alert danger'
+            errorParagraph.innerHTML = msg
+            addClientDialog.insertBefore(errorParagraph, child)
+            //move focus away from select
+            startDate.focus()
+            //remove error notification after 5seconds
+            if (errorParagraph) {
+              removeElement(errorParagraph, 5000)
+            }
+
             return
           } else {
             data.rooms.forEach((room) => {
@@ -659,6 +670,12 @@ export const singleClientDetails = async (url) => {
               roomSelector.appendChild(option)
             })
           }
+        })
+        roomSelector.addEventListener('change', async (e) => {
+          const room = e.target.value
+          //query room pice
+          const { data, status, error } = await roomPrice(room)
+          unitPrice.value = data.price
         })
       })
     }

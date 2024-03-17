@@ -844,7 +844,8 @@ textarea {
   font-size: 1.3rem;
 }
 .client-main .page-content .profile .names .edit-user,
-.add-client-modal {
+.add-client-modal,
+.edit-active-accommodation {
   position: absolute;
   width: 90vw;
   margin: 0 auto;
@@ -878,17 +879,21 @@ textarea {
   padding-bottom: 4rem;
 } */
 .client-main .page-content .profile .names .edit-user form,
-.new-accommodation-form {
+.new-accommodation-form,
+.edit-accommodation-form {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(13rem, 1fr));
   gap: 0.5rem;
 }
-.new-accommodation-form {
+.new-accommodation-form,
+.edit-accommodation-form {
   row-gap: 0.7rem;
 }
 .client-main .page-content .profile .names .edit-user form input,
 .new-accommodation-form input,
-.new-accommodation-form select {
+.new-accommodation-form select,
+.edit-accommodation-form input,
+.edit-accommodation-form select {
   padding: 0.3rem;
   font-size: 1rem;
   border: 1px solid var(--grey-timberwolf);
@@ -897,19 +902,22 @@ textarea {
 }
 
 .client-main .page-content .profile .names .edit-user form .edit-client,
-.new-accommodation-form .new-acc {
+.new-accommodation-form .new-acc,
+.edit-accommodation-form .edit-acc {
   display: flex;
   flex-direction: column;
   gap: 0.3rem;
 }
-.client-main .page-content .profile .names .edit-user form .submit-btn {
+.client-main .page-content .profile .names .edit-user form .submit-btn,
+.edit-accommodation {
   flex-direction: row;
   gap: 1rem;
   margin-top: 1rem;
   justify-content: center;
 }
 .client-main .page-content .profile .names .edit-user form .submit-btn input,
-.new-accommodation.submit-btn input[type='submit'] {
+.new-accommodation.submit-btn input[type='submit'],
+.edit-accommodation.submit-btn input[type='submit'] {
   padding: 0.5rem 2rem;
   background-color: var(--blue-midnight);
   color: var(--grey-timberwolf);
@@ -924,7 +932,8 @@ textarea {
   form
   .submit-btn
   input:hover,
-.new-accommodation.submit-btn input[type='submit']:hover {
+.new-accommodation.submit-btn input[type='submit']:hover,
+.edit-accommodation.submit-btn input[type='submit']:hover {
   transform: scale(1.1);
 }
 .client-main
@@ -935,7 +944,8 @@ textarea {
   form
   .submit-btn
   :nth-child(1),
-.new-accommodation.submit-btn input[type='submit']:nth-child(1) {
+.new-accommodation.submit-btn input[type='submit']:nth-child(1),
+.edit-accommodation.submit-btn input[type='submit']:nth-child(1) {
   background-color: var(--black-oliver);
 }
 .accommodation {
@@ -1074,12 +1084,14 @@ textarea {
   border: none;
   font-size: 1.2rem;
 }
-.new-accommodation.submit-btn {
+.new-accommodation.submit-btn,
+.edit-accommodation.submit-btn {
   display: flex;
   gap: 0.5rem;
   margin-top: 1rem;
 }
-.new-accommodation.submit-btn input[type='submit'] {
+.new-accommodation.submit-btn input[type='submit'],
+.edit-accommodation.submit-btn input[type='submit'] {
   width: 50%;
 }
 /* ================ CLIENT DETAIL PAGE ================================= */
@@ -1097,7 +1109,8 @@ textarea {
   .reg-main .page-content .form-container form section .fields {
     grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
   }
-  .new-accommodation.submit-btn {
+  .new-accommodation.submit-btn,
+  .edit-accommodation.submit-btn {
     align-items: end;
   }
 }
@@ -1151,7 +1164,8 @@ textarea {
     border: none;
   }
   .client-main .page-content .profile .names .edit-user,
-  .add-client-modal {
+  .add-client-modal,
+  .edit-active-accommodation {
     width: 80%;
     max-width: 50rem;
     top: 50%;

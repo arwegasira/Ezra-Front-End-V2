@@ -1,5 +1,5 @@
 const moment = require('moment')
-
+import { buildHtml } from './createInnerHtml'
 // alert div
 const alertdiv = (width, message, className, parent, child) => {
   const div = document.createElement('div')
@@ -498,11 +498,12 @@ export const singleClientDetails = async (url) => {
       </li>
       
       <li>
-      <button><i class="fa-regular fa-pen-to-square"></i></button>
+      <button><i class="fa-regular fa-pen-to-square edit-acc-btn"></i></button>
       <button class="avail-room">Avail Room</button>
       <button class="checkout">check out</button>
       </li>
       </ul>
+      <dialog class="edit-active-accommodation"></dialog>
       `
     } else {
       const button = document.createElement('button')
@@ -724,6 +725,20 @@ export const singleClientDetails = async (url) => {
               addClientDialog.close()
             }
           })
+      })
+    }
+
+    if (activeAccommodation.length) {
+      const editAccommodation = document.querySelector(
+        '.edit-active-accommodation'
+      )
+      buildHtml({
+        parent: editAccommodation,
+        context: 'edit active accommodation',
+      })
+      document.querySelector('.edit-acc-btn').addEventListener('click', (e) => {
+        //show edit accommodation dialog
+        editAccommodation.showModal()
       })
     }
 

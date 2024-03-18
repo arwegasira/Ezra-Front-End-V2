@@ -729,12 +729,18 @@ export const singleClientDetails = async (url) => {
     }
 
     if (activeAccommodation.length) {
+      const { startDate, endDate, roomDetails, unitPrice, totalCost } =
+        activeAccommodation[0]
       const editAccommodation = document.querySelector(
         '.edit-active-accommodation'
       )
       buildHtml({
         parent: editAccommodation,
         context: 'edit active accommodation',
+        startDate,
+        endDate,
+        roomDetails,
+        unitPrice,
       })
       document.querySelector('.edit-acc-btn').addEventListener('click', (e) => {
         //show edit accommodation dialog

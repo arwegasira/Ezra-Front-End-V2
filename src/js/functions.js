@@ -544,6 +544,9 @@ export const singleClientDetails = async (url) => {
       `
       serviceList.appendChild(li)
     })
+    const addServiceDialog = document.createElement('dialog')
+    addServiceDialog.className += 'new-service-dialog'
+    servicesDiv.appendChild(addServiceDialog)
     currentTab.appendChild(activeAccommodationDiv)
     currentTab.appendChild(servicesDiv)
 
@@ -560,6 +563,7 @@ export const singleClientDetails = async (url) => {
     }
 
     const newAccommodation = document.querySelector('.new-accommodation-btn')
+    //add accommodation
     if (newAccommodation) {
       newAccommodation.addEventListener('click', () => {
         const addClientDialog = document.querySelector('.add-client-modal')
@@ -727,6 +731,7 @@ export const singleClientDetails = async (url) => {
       })
     }
 
+    //edit accommodation
     if (activeAccommodation.length) {
       const { startDate, endDate, roomDetails, unitPrice, totalCost } =
         activeAccommodation[0]
@@ -822,6 +827,16 @@ export const singleClientDetails = async (url) => {
             }
           }
         }
+      })
+    }
+    //add service
+    const newServiceBtn = document.querySelector('.new-service-btn')
+    const newServiceDialog = document.querySelector('.new-service-dialog')
+    if (newServiceBtn) {
+      //build new service dialog html
+      buildHtml({ parent: newServiceDialog, context: 'new service' })
+      newServiceBtn.addEventListener('click', () => {
+        newServiceDialog.showModal()
       })
     }
 

@@ -691,7 +691,6 @@ export const singleClientDetails = async (url) => {
                 'DD/MM/YYYY'
               )
               formData.endDate = moment(formData.endDate).format('DD/MM/YYYY')
-              console.log(formData)
               const url = `${process.env.API_URL_DEV}/client/addaccommodation`
               const { data, status, headers, error } = await apiCall(
                 url,
@@ -745,6 +744,84 @@ export const singleClientDetails = async (url) => {
       document.querySelector('.edit-acc-btn').addEventListener('click', (e) => {
         //show edit accommodation dialog
         editAccommodation.showModal()
+      })
+      const roomSelector = document.querySelector('.edit-acc-room-selector')
+      if (roomSelector) {
+        roomSelector.addEventListener('focus', async (e) => {
+          const initialValue = e.target.value
+          e.target.innerHTML = ` <option value=${initialValue} selected>${initialValue}</option>`
+          //api call
+          const { data, status, headers, error } = await availableRooms()
+          if (status !== 200) {
+            console.log(error)
+            const msg = error?.data?.msg || 'Something went wrong'
+            //add error notification
+            const child = document.querySelector('.edit-acc-title')
+            const errorParagraph = document.createElement('p')
+            errorParagraph.className += 'alert danger'
+            errorParagraph.innerHTML = msg
+            editAccommodation.insertBefore(errorParagraph, child)
+            //move focus away from select
+            startDate.focus()
+            //remove error notification after 5seconds
+            if (errorParagraph) {
+              removeElement(errorParagraph, 5000)
+            }
+
+            return
+          } else {
+            data.rooms.forEach((room) => {
+              const option = document.createElement('option')
+              option.value = room.name
+              option.innerHTML = room.name
+              roomSelector.appendChild(option)
+            })
+          }
+        })
+      }
+      //submit or cancel editing
+      const editAccommodationForm = document.querySelector(
+        '.edit-accommodation-form'
+      )
+      editAccommodationForm.addEventListener('click', async (e) => {
+        if (e.target.id === 'cancel-editAcc') {
+          e.preventDefault()
+          editAccommodation.close()
+        }
+        if (e.target.id === 'submit-editAcc') {
+          e.preventDefault()
+          let formData = new FormData(e.currentTarget)
+          formData = Object.fromEntries(formData)
+          formData.clientId = id
+          formData.startDate = moment(formData.startDate).format('DD/MM/YYYY')
+          formData.endDate = moment(formData.endDate).format('DD/MM/YYYY')
+          const url = `${process.env.API_URL_DEV}/client/editaccommodation`
+          const { data, status, headers, error } = await apiCall(
+            url,
+            'POST',
+            formData
+          )
+          if (status === 200) {
+            // close modal
+            editUserDialog.close()
+            window.location.reload()
+          } else {
+            errorDialogExist = document.querySelector(
+              '.add-client-modal .alert.danger'
+            )
+            if (!errorDialogExist) {
+              //show error message
+              const child = document.querySelector('.add-client-title')
+              const msg = data || 'Something went wrong'
+              alertdiv('100%', msg, 'danger', addClientDialog, child)
+              const alertEl = document.querySelector(
+                '.add-client-modal .alert.danger'
+              )
+              //remove error message after 5seconds
+              removeElement(alertEl, 5000)
+            }
+          }
+        }
       })
     }
 

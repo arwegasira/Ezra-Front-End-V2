@@ -1,6 +1,14 @@
 const moment = require('moment')
 
-const htmlContent = ({ unitPrice, startDate, endDate, roomName, title }) => {
+const htmlContent = ({
+  unitPrice,
+  startDate,
+  endDate,
+  roomName,
+  title,
+  service,
+  total,
+}) => {
   return {
     editAccommodation: ` <h4 class ='edit-acc-title'>Edit Accommodation</h4>
         <form action="" class="edit-accommodation-form">
@@ -80,7 +88,7 @@ const htmlContent = ({ unitPrice, startDate, endDate, roomName, title }) => {
              <div class="new-service new-service-name">
               <label for="service">Choose Service</label>
               <select name="service" id="service" class="new-service-service-selector">
-              <option value="Choose Service" selected disabled>Choose Service</option>
+              <option value='Choose Service' selected disabled> 
               <option value="Food and Beverage">Food and Beverage</option>
               <option value="Laundry">Laundry</option>
               </select>
@@ -124,6 +132,8 @@ export const buildHtml = ({
   endDate,
   roomDetails,
   unitPrice,
+  service,
+  total,
 }) => {
   if (context === 'edit active accommodation') {
     // parent.innerHTML = content.editAccommodation
@@ -135,6 +145,10 @@ export const buildHtml = ({
     }).editAccommodation
   }
   if (context === 'new service') {
-    parent.innerHTML = htmlContent({ title: 'Add New Service' }).newService
+    parent.innerHTML = htmlContent({
+      title: 'Add New Service',
+      service,
+      total,
+    }).newService
   }
 }

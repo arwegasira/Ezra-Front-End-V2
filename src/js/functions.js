@@ -540,7 +540,7 @@ export const singleClientDetails = async (url) => {
       <span>Amount</span>
       <span>${service.total}</span>
       </div>
-    <button><i class="fa-regular fa-pen-to-square"></i></button>
+    <button data-service-id =${service.serviceId}><i class="fa-regular fa-pen-to-square edit-service"></i></button>
       `
       serviceList.appendChild(li)
     })
@@ -838,8 +838,63 @@ export const singleClientDetails = async (url) => {
       newServiceBtn.addEventListener('click', () => {
         newServiceDialog.showModal()
       })
-    }
+      //save or cancel service
+      document
+        .querySelector('.new-service-form')
+        .addEventListener('click', async (e) => {
+          if (e.target.id === 'cancel-new-service') {
+            e.preventDefault()
+            newServiceDialog.close()
+          }
+          if (e.target.id === 'submit-new-service') {
+            e.preventDefault()
+            let formData = new FormData(e.currentTarget)
+            formData = Object.fromEntries(formData)
+            const url = `${process.env.API_URL_DEV}/client/addservice/${id}`
+            const { data, status, headers, error } = await apiCall(
+              url,
+              'POST',
+              formData
+            )
 
+            if (status === 200) {
+              // close modal
+              newServiceDialog.close()
+              window.location.reload()
+            } else {
+              errorDialogExist = document.querySelector(
+                '.add-client-modal .alert.danger'
+              )
+              if (!errorDialogExist) {
+                //show error message
+                const child = document.querySelector('.add-service-title')
+                const msg = data?.msg || 'Something went wrong'
+                alertdiv('100%', msg, 'danger', newServiceDialog, child)
+                const alertEl = document.querySelector(
+                  '.add-client-modal .alert.danger'
+                )
+                //remove error message after 5seconds
+                removeElement(alertEl, 5000)
+              }
+            }
+          }
+        })
+    }
+    //edit service
+    if (newServiceDialog) {
+      const editServiceBtn = document.querySelectorAll('.edit-service')
+      editServiceBtn.forEach((btn) => {
+        btn.addEventListener('click', (e) => {
+          const parentBtn = e.target.parentElement
+          const currentServiceId = parentBtn.dataset.serviceId
+          //find serviceName and amount
+          const { service, total } = activeServices.find(
+            (service) => service.serviceId === currentServiceId
+          )
+          //rebuild new service dialog
+        })
+      })
+    }
     console.log(data)
   }
   return data

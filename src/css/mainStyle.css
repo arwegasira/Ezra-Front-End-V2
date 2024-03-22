@@ -1070,8 +1070,8 @@ textarea {
   margin-top: 1rem;
 }
 .active-services-list li {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   padding: 1rem 0;
   border-bottom: 1px solid var(--grey-timberwolf);
 }

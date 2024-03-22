@@ -864,7 +864,7 @@ export const singleClientDetails = async (url) => {
               window.location.reload()
             } else {
               errorDialogExist = document.querySelector(
-                '.add-client-modal .alert.danger'
+                '.new-service-dialog .alert.danger'
               )
               if (!errorDialogExist) {
                 //show error message
@@ -934,7 +934,7 @@ export const singleClientDetails = async (url) => {
                 const msg = data?.msg || 'Something went wrong'
                 alertdiv('100%', msg, 'danger', editServiceDialog, child)
                 const alertEl = document.querySelector(
-                  '.add-client-modal .alert.danger'
+                  '.edit-service-dialog .alert.danger'
                 )
                 //remove error message after 5seconds
                 removeElement(alertEl, 5000)

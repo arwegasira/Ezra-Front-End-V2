@@ -463,7 +463,7 @@ export const singleClientDetails = async (url) => {
         activeAccommodation[0]
       activeAccommodationDiv.innerHTML = `
       <h4>Active Accommodation</h4>
-      <ul>
+      <ul class='active-accommodation-list'>
       <li>
       <span>Start Date</span>
       <span>${moment(startDate).format('MMM Do YY')}</span>
@@ -864,7 +864,7 @@ export const singleClientDetails = async (url) => {
               window.location.reload()
             } else {
               errorDialogExist = document.querySelector(
-                '.new-service-dialog .alert.danger'
+                '.add-client-modal  .alert.danger'
               )
               if (!errorDialogExist) {
                 //show error message
@@ -926,7 +926,7 @@ export const singleClientDetails = async (url) => {
             } else {
               console.log(error)
               errorDialogExist = document.querySelector(
-                '.add-client-modal .alert.danger'
+                '.edit-service-dialog .alert.danger'
               )
               if (!errorDialogExist) {
                 //show error message
@@ -945,6 +945,34 @@ export const singleClientDetails = async (url) => {
       })
     })
 
+    //avail room
+    const availRoom = document.querySelector('.avail-room')
+    if (availRoom) {
+      availRoom.addEventListener('click', async (e) => {
+        //api call
+        const url = `${process.env.API_URL_DEV}/client/availRoom/${id}`
+        const { data, status, headers, error } = await apiCall(url, 'PATCH')
+        if (status === 200) {
+          window.location.reload()
+        } else {
+          errorDialogExist = document.querySelector(
+            '.add-client-modal .alert.danger'
+          )
+          if (!errorDialogExist) {
+            //show error message
+            const child = document.querySelector('.active-accommodation-list')
+            const parent = document.querySelector('.active-accommodations')
+            const msg = data?.msg || 'Something went wrong'
+            alertdiv('100%', msg, 'danger', parent, child)
+            const alertEl = document.querySelector(
+              '.active-accommodations .alert.danger'
+            )
+            //remove error message after 5seconds
+            removeElement(alertEl, 5000)
+          }
+        }
+      })
+    }
     console.log(data)
   }
   return data

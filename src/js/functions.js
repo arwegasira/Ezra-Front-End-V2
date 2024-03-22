@@ -541,6 +541,7 @@ export const singleClientDetails = async (url) => {
       <span>${service.total}</span>
       </div>
     <button data-service-id =${service.serviceId}><i class="fa-regular fa-pen-to-square edit-service"></i></button>
+    <dialog class='edit-service-dialog'></dialog>
       `
       serviceList.appendChild(li)
     })
@@ -881,20 +882,69 @@ export const singleClientDetails = async (url) => {
         })
     }
     //edit service
-    if (newServiceDialog) {
-      const editServiceBtn = document.querySelectorAll('.edit-service')
-      editServiceBtn.forEach((btn) => {
-        btn.addEventListener('click', (e) => {
-          const parentBtn = e.target.parentElement
-          const currentServiceId = parentBtn.dataset.serviceId
-          //find serviceName and amount
-          const { service, total } = activeServices.find(
-            (service) => service.serviceId === currentServiceId
-          )
-          //rebuild new service dialog
+    const editServiceBtn = document.querySelectorAll('.edit-service')
+    const editServiceDialog = document.querySelector('.edit-service-dialog')
+
+    editServiceBtn.forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const parentBtn = e.target.parentElement
+        const currentServiceId = parentBtn.dataset.serviceId
+        //find serviceName and amount
+        console.log(activeServices)
+        const { serviceId, service, total } = activeServices.find(
+          (service) => service.serviceId === currentServiceId
+        )
+        //rebuild new service dialog
+        buildHtml({
+          parent: editServiceDialog,
+          context: 'edit service',
+          service,
+          total,
+        })
+        editServiceDialog.showModal()
+        const editServiceForm = document.querySelector('.edit-service-form')
+        editServiceForm.addEventListener('click', async (e) => {
+          if (e.target.id === 'cancel-edit-service') {
+            e.preventDefault()
+            editServiceDialog.close()
+          }
+          if (e.target.id === 'submit-edit-service') {
+            e.preventDefault()
+            let formData = new FormData(e.currentTarget)
+            formData = Object.fromEntries(formData)
+            console.log(formData)
+            const url = `${process.env.API_URL_DEV}/client/editservice?client=${id}&service=${serviceId}`
+            const { data, status, headers, error } = await apiCall(
+              url,
+              'POST',
+              formData
+            )
+            if (status === 200) {
+              // close modal
+              editServiceDialog.close()
+              window.location.reload()
+            } else {
+              console.log(error)
+              errorDialogExist = document.querySelector(
+                '.add-client-modal .alert.danger'
+              )
+              if (!errorDialogExist) {
+                //show error message
+                const child = document.querySelector('.edit-service-title')
+                const msg = data?.msg || 'Something went wrong'
+                alertdiv('100%', msg, 'danger', editServiceDialog, child)
+                const alertEl = document.querySelector(
+                  '.add-client-modal .alert.danger'
+                )
+                //remove error message after 5seconds
+                removeElement(alertEl, 5000)
+              }
+            }
+          }
         })
       })
-    }
+    })
+
     console.log(data)
   }
   return data

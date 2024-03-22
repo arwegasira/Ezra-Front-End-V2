@@ -88,7 +88,7 @@ const htmlContent = ({
              <div class="new-service new-service-name">
               <label for="service">Choose Service</label>
               <select name="service" id="service" class="new-service-service-selector">
-              <option value='Choose Service' selected disabled> 
+              <option value='Choose Service' selected disabled>Choose Service</option>
               <option value="Food and Beverage">Food and Beverage</option>
               <option value="Laundry">Laundry</option>
               </select>
@@ -123,6 +123,57 @@ const htmlContent = ({
             </div>
             
           </form>`,
+    editService: `<h4 class ='edit-service-title'>${title}</h4>
+        <form action="" class="edit-service-form">
+
+             <div class="edit-service edit-service-name">
+              <label for="service">Choose Service</label>
+              <select name="serviceName" id="service" class="edit-service-service-selector">
+               <option value=${service} selected>${service}</option>
+              ${
+                service !== 'Food and Beverage'
+                  ? `<option value="Food and Beverage">Food and Beverage</option>`
+                  : null
+              }
+               ${
+                 service !== 'Laundry'
+                   ? `   <option value="Laundry">Laundry</option>`
+                   : null
+               }
+           
+              </select>
+            </div>
+
+            <div class="edit-service edit-service-price">
+              <label for="price">Amount</label>
+              <input
+                type="Number"
+                name="price"
+                id="price"
+                class="edit-service-price-input"
+                value=${total}
+              />
+            </div>
+
+            <div class="edit-service submit-btn">
+                <input
+                type="submit"
+                name="cancel"
+                id="cancel-edit-service"
+                class="cancel"
+                value="Cancel"
+              />
+              <input
+                type="submit"
+                name="submit"
+                id="submit-edit-service"
+                class="submit"
+                value="Save"
+              />
+
+            </div>
+            
+          </form>`,
   }
 }
 export const buildHtml = ({
@@ -147,8 +198,13 @@ export const buildHtml = ({
   if (context === 'new service') {
     parent.innerHTML = htmlContent({
       title: 'Add New Service',
+    }).newService
+  }
+  if (context === 'edit service') {
+    parent.innerHTML = htmlContent({
+      title: 'Edit Service',
       service,
       total,
-    }).newService
+    }).editService
   }
 }

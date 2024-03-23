@@ -955,7 +955,7 @@ export const singleClientDetails = async (url) => {
         if (status === 200) {
           window.location.reload()
         } else {
-          errorDialogExist = document.querySelector(
+          const errorDialogExist = document.querySelector(
             '.active-accommodations .alert.danger'
           )
           if (!errorDialogExist) {

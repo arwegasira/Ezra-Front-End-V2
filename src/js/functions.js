@@ -956,7 +956,7 @@ export const singleClientDetails = async (url) => {
           window.location.reload()
         } else {
           errorDialogExist = document.querySelector(
-            '.add-client-modal .alert.danger'
+            '.active-accommodations .alert.danger'
           )
           if (!errorDialogExist) {
             //show error message

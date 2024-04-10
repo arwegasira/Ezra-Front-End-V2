@@ -174,8 +174,6 @@ export const singleClientDetails = async (url) => {
   //add a spinner as script waits api result
   const loader = spinningLoader()
   document.querySelector('.page-content').appendChild(loader)
-  console.log(url)
-  console.log(url)
   //find client
   const { data, status, headers, error } = await apiCall(url)
 
